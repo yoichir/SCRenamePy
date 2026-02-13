@@ -646,11 +646,11 @@ def rename_file(src_path: str, dst_path: str, options: RenameOptions) -> bool:
         src = Path(src_path)
         dst = Path(dst_path)
         
-        # リネーム先ディレクトリが存在しない場合は作成
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        
         # リネーム実行
         if not options.test_mode:  # -t オプション
+            # リネーム先ディレクトリが存在しない場合は作成
+            dst.parent.mkdir(parents=True, exist_ok=True)
+
             # 強制上書きモードでない場合は存在確認
             if not options.force_rename and dst.exists():
                 print(f"{dst} はすでに存在しています。", file=sys.stderr)
